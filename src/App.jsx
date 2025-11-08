@@ -3,11 +3,15 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Navbar from './Components/Navbar';
 import Home from "./pages/Home";
 import Footer from './Footer/Footer';
+import Home from './Home/Home';
+
 
 function App() {
 
   return (
-    <div className="App">
+    <div className="App"> 
+    
+   
       <Router>
         <Navbar />
         <Routes>
