@@ -198,27 +198,29 @@ function Footer() {
               fontWeight: 700,
               mb: 2,
               fontSize: { xs: 20, sm: 22 },
+              ml:{lg:2,xl:3}
             }}
           >
             Contact Us
           </Typography>
 
           <Stack spacing={2} sx={{ mt: 1 }}>
-            <Box sx={{ display: "flex", gap: 1.5, alignItems: "flex-start" }}>
+            <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
               <LocationOn sx={{ color: "#fad13d", mt: "6px" }} />
               <Typography sx={{ color: "#dbe6f6", lineHeight: 1.6 }}>
-                123 Paint Street, Color City, PC 12345
+                5/128A, Puthugramam Road, Chadayankulam,
+Thiruppathisaram Post, Nagercoil - 629 901
               </Typography>
             </Box>
 
             <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
               <CallOutlined sx={{ color: "#fad13d" }} />
-              <Typography sx={{ color: "#dbe6f6" }}>+91 123 456 7890</Typography>
+              <Typography sx={{ color: "#dbe6f6" }}>+91 98650 65511  </Typography>
             </Box>
 
             <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
               <MailOutlined sx={{ color: "#fad13d" }} />
-              <Typography sx={{ color: "#dbe6f6" }}>info@sreepaints.com</Typography>
+              <Typography sx={{ color: "#dbe6f6" }}>sreepaints2000@gmail.com</Typography>
             </Box>
           </Stack>
         </Box>
