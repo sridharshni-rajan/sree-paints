@@ -54,7 +54,7 @@ const Navbar = () => {
                     color: isHomePage ? "hsl(40,30%,97%)" : "hsl(220,15%,25%)",
                     textDecoration: "none",
                     transition: "color 0.3s ease",
-                    "&:hover": { color: "hsl(45,100%,55%)" },
+                    "&:hover": { color: "#FAD13D" },
                 }}
                 >
                 Sree Paints
@@ -79,7 +79,7 @@ const Navbar = () => {
                         color: isHomePage ? "hsl(40,30%,97%)" : "hsl(220,15%,25%)",
                         textTransform: "none",
                         position: "relative",
-                        "&:hover": isHomePage ? { color: "hsl(45,100%,55%)" } : { color: "hsl(220,70%,20%)" },
+                        "&:hover": isHomePage ? { color: "#FAD13D" } : { color: "hsl(220,70%,20%)" },
                         "&::after": isActive
                         ? {
                             content: '""',
@@ -107,10 +107,10 @@ const Navbar = () => {
                     fontSize: "0.875rem",
                     textTransform: "none",
                     borderRadius: "10px",
-                    background: "linear-gradient(to right, hsl(45,100%,55%), hsl(40,90%,60%))",
+                    background: "linear-gradient(to right, #FAD13D, #FAD13D)",
                     color: "hsl(0,0%,100%)",
                     "&:hover": {
-                    background: "linear-gradient(to right, hsl(40,90%,60%), hsl(45,100%,55%))",
+                    background: "linear-gradient(to right, #FAD13D, #FAD13D)",
                     },
                 }}
                 >

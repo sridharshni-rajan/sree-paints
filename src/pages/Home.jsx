@@ -12,8 +12,6 @@ const Home = () => {
         overflow: "hidden", 
       }}
     >
-      <Navbar />
-
       <Box
         sx={{
           position: "fixed", 
