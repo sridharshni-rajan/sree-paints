@@ -5,6 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import "@fontsource/playfair-display/600.css";
 import GetQuoteButton from "./GetQuoteButton";
+import logo from "../assets/logo.png"; 
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -66,7 +67,7 @@ function Navbar() {
                 background: "linear-gradient(to bottom, hsl(220,70%,20%), hsl(220,60%,30%))",
               }}
             >
-              <img src="/src/assets/logo.png" alt="Logo" 
+              <img src={logo} alt="Logo" 
                 style={{ width: "35px", height: "35px", objectFit: "contain" }} 
               />
             </Button>
