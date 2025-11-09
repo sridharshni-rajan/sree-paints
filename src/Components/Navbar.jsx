@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import "@fontsource/playfair-display";
+import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
+import "@fontsource/playfair-display/600.css";
+import GetQuoteButton from "./GetQuoteButton";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   const isHome = location.pathname === "/";
@@ -18,13 +21,28 @@ function Navbar() {
     { label: "Contact", path: "/contact" },
   ];
 
+  useEffect(() => {
+    const handleResize = () => window.innerWidth >= 768 && setOpen(false);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: isHome ? "transparent" : "hsl(0,0%,100%)",
-          boxShadow: isHome ? "none" : "0 4px 12px rgba(0,0,0,0.08)",
+          backgroundColor: isHome && !scrolled && !open ? "transparent" : "hsl(0,0%,100%)",
+          boxShadow: "none",
+          transition: "0.3s",
+          zIndex:2000
         }}
       >
         <Toolbar sx={{ px: 3, display: "flex", minHeight: { xs: 80, md: 90 }, justifyContent: "space-between"}}>
@@ -34,6 +52,9 @@ function Navbar() {
             <Button
                 component={Link}
                 to="/"
+                onClick={() => {
+                  if (!open) window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 sx={{
                 color: "#fff",
                 fontWeight: "700",
@@ -45,19 +66,18 @@ function Navbar() {
                 background: "linear-gradient(to bottom, hsl(220,70%,20%), hsl(220,60%,30%))",
               }}
             >
-              S
+              <img src="/src/assets/logo.png" alt="Logo" 
+                style={{ width: "35px", height: "35px", objectFit: "contain" }} 
+              />
             </Button>
             <Typography
-              component={Link}
-              to="/"
               sx={{
                 fontFamily: "Playfair Display",
-                fontWeight: 700,
-                fontSize: { xs: 20, sm: 28 },
-                color: isHome ? "#fff" : "#132847",
+                fontWeight: 600,
+                fontSize: { xs: 20, sm: 30 },
+                color: isHome && !scrolled && !open ? "#fff" : "#132847",
                 textDecoration: "none",
                 transition: "color 0.3s ease",
-                "&:hover": { color: "#132847" },
               }}
             >
               Sree Paints
@@ -77,7 +97,7 @@ function Navbar() {
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 500,
                   fontSize: "0.875rem",
-                  color: isHome ? "#fff" : "#132847",
+                  color: isHome && !scrolled ? "#fff" : "#132847",
                   textTransform: "none",
                   position: "relative",
                   "&:hover": isHome ? { color: "#fad13d" } : { color: "#132847"},
@@ -96,50 +116,40 @@ function Navbar() {
                 {item.label}
               </Button>
             );
-            })}
-
-            <Button
-              variant="contained"
-              sx={{
-                fontWeight: 500,
-                fontSize: "0.875rem",
-                textTransform: "none",
-                borderRadius: "10px",
-                backgroundColor: "#fad13d",
-                color: "#132847",
-                "&:hover": { backgroundColor: "#fad13d" },
-              }}
-            >
-              Get Quote
-            </Button>
+            })} 
+            <GetQuoteButton variantType="desktop" />           
           </Box>
 
           {/* MENU ICON - MOBILE */}
-          <IconButton sx={{ display: { xs: "flex", md: "none" }, "&:hover": { color: "#132847" }, color: isHome ? "#fff" : "#132847",}} disableRipple 
-            onClick={() => setOpen(true)}>
-            <MenuIcon />
+          <IconButton sx={{ display: { xs: "flex", md: "none" }, "&:hover": { color: "#132847" }, color: isHome && !scrolled && open ? "#132847" : "#132847",zIndex: 3000, }} disableRipple 
+            onClick={() => setOpen(!open)}>
+            {open ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
         </Toolbar>
       </AppBar>
 
       {/* MOBILE DRAWER */}
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)} PaperProps={{
+      <Drawer anchor="right" open={open} onClose={() => setOpen(false)} hideBackdrop PaperProps={{
             sx: {
-            backgroundColor: "transparent", 
-            boxShadow: "none",              
+            backgroundColor: "#fff", 
+            width: "100%",
+            height: "60%",
+            marginTop: "80px",
+            boxShadow: "none", 
             },
         }}>
-        <List sx={{ width: 200,height: "100%"  }}>
+        <List sx={{  display: "flex", flexDirection: "column", gap: 1  }}>
           {menuItems.map((item) => (
             <ListItem onClick={() => setOpen(false)}
               key={item.label}
               component={Link}
               to={item.path}
-              sx={{ py: 3.5, color: "#fff", "&:hover": { backgroundColor: "#fad13d", color: "#132847" }, fontFamily: "'Inter', sans-serif", }}
+              sx={{mx: 3, px: 2, py: 1.8, borderRadius: "10px", color: "#132847", width: "93%","&:hover": { backgroundColor: "#dfd9d9ff"}, fontFamily: "'Inter', sans-serif", }}
             >
               {item.label}
             </ListItem>
           ))}
+          <GetQuoteButton variantType="mobile" onClick={() => setOpen(false)} />
         </List>
       </Drawer>
     </>
