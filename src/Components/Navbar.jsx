@@ -71,7 +71,6 @@ function Navbar() {
                 style={{ width: "35px", height: "35px", objectFit: "contain" }} 
               />
             </Button>
-            )}
             <Typography
               sx={{
                 fontFamily: "Playfair Display",
