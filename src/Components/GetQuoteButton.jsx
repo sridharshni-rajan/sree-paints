@@ -18,9 +18,10 @@ function GetQuoteButton({ variantType = "desktop", onClick }) {
 
         ...(variantType === "desktop" && { display: { xs: "none", md: "inline-flex" }, px: 2, }),
         ...(variantType === "mobile" && { mt: 2, mx: 3, py: 1.5, }),
+        ...(variantType === "center" && { width:200 ,display: "flex", mx: "auto", py: 1.5 })     
       }}
     >
-      Get Quote
+      {variantType === "center" ? "Get Free Quote" : "Get Quote"}
     </Button>
   );
 }
