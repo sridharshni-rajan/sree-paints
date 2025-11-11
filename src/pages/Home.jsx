@@ -86,12 +86,12 @@ function Home() {
         </Box>
       </Box>
       {/* --------- Why Choose Section --------- */}
-      <Box sx={{ backgroundColor: "rgba(230, 228, 226, 0.38)", pt: 4, pb: 9}}>
+      <Box sx={{  minHeight: "90vh",background: "linear-gradient(180deg, #f7f7f7b2, #edf0e3cb)", pt: 4, pb: 9}}>
         <Typography
           variant="h3"
           sx={{
             textAlign: "center",
-            mt: 6,
+            mt: 9,
             fontFamily: "Playfair Display",
             fontWeight: 700,
             fontSize: { xs: "3rem", md: "3rem" },
@@ -120,9 +120,10 @@ function Home() {
             mt: 8,
             display: "flex",
             flexWrap: "wrap",
-            gap: 5,
+            gap: { xs: 3.6, md: 5 },
             justifyContent: "center",
-            px: { xs: 2, md: 1 }
+            px: { xs: 1, md: 1 },
+        
           }}
         >
         {[
@@ -150,12 +151,11 @@ function Home() {
           <Box
             key={index}
             sx={{
-              width: { xs: "100%", sm: "45%", md: "22%" },
+              width: { xs:"100%", sm:"45%", md: "22%" },
               background: "#fff",
-              border: "1px solid #d3d3d3",
               borderRadius: "14px",
               boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              p: 5,
+              p: { xs: 4, md: 5 },
               textAlign: "center",
               position: "relative",
               "&:hover .iconCircle": { transform: "scale(1.25)" },
@@ -168,6 +168,7 @@ function Home() {
                 width: "60px",
                 height: "60px",
                 margin: "0 auto 15px",
+                mb: 3,
                 borderRadius: "50%",
                 background: "linear-gradient(to bottom, hsl(220,70%,20%), hsl(220,60%,30%))",
                 display: "flex",
@@ -179,12 +180,12 @@ function Home() {
             >
               {item.icon}
             </Box>
-            <Typography variant="h6" sx={{ fontFamily: "Playfair Display", fontWeight: 700, mb: 1, color: "#3c3c41ff" }}>
+            <Typography variant="h6" sx={{ fontFamily: "Playfair Display", fontWeight: 700, mb: 1.5, color: "#3c3c41ff" }}>
               {item.title}
             </Typography>
             <Typography
               variant="body2"
-              sx={{ fontSize: { xs: "15px", md: "15.5px" }, color: "#76788fff", lineHeight: 1.5, width:"100%" }}
+              sx={{ fontSize: { xs: "16px", md: "15.5px" }, color: "#76788fff", lineHeight: 1.5, width:"105%" }}
             >
               {item.desc}
             </Typography>
@@ -196,7 +197,7 @@ function Home() {
 
       {/* --------- Testimonials Section --------- */}
       
-       <Box sx={{  minHeight: "90vh",pt: 4, pb: 9}}>
+       <Box sx={{  minHeight: "90vh",pt: 4, pb: 9, backgroundColor: "#eeece871"}}>
         <Typography
           variant="h3"
           sx={{
@@ -263,10 +264,9 @@ function Home() {
               border: "1px solid #d3d3d3",
               borderRadius: "14px",
               boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              p: 5,
+              p: 3,
               textAlign: "center",
               position: "relative",
-              "&:hover .iconCircle": { transform: "scale(1.25)" },
             }}
           >
             <Rating

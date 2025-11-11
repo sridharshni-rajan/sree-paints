@@ -46,7 +46,7 @@ function Navbar() {
           zIndex:2000
         }}
       >
-        <Toolbar sx={{ px: 3, display: "flex", minHeight: { xs: 80, md: 90 }, justifyContent: "space-between"}}>
+        <Toolbar sx={{ px: 3, display: "flex", minHeight: { xs: 80, md: 80 }, justifyContent: "space-between"}}>
 
           {/* LOGO */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -61,14 +61,14 @@ function Navbar() {
                 fontWeight: "700",
                 borderRadius: "14px",
                 minWidth: { xs: 48, sm: 60 },
-                minHeight: { xs: 48, sm: 60 },
+                minHeight: { xs: 20, sm: 60 },
                 fontSize: { xs: 18, sm: 24 },
                 boxShadow: "0 0 8px 2px rgba(244,192,76,0.18)", 
                 background: "linear-gradient(to bottom, hsl(220,70%,20%), hsl(220,60%,30%))",
               }}
             >
               <img src={logo} alt="Logo" 
-                style={{ width: "35px", height: "35px", objectFit: "contain" }} 
+                style={{ width: "33px", height: "33px", objectFit: "contain" }} 
               />
             </Button>
             <Typography
