@@ -10,6 +10,7 @@ import {
   MailOutlined,
   CopyrightOutlined,
   Home,
+  Google
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 // Custom Telephone Icon (from Google Fonts)
@@ -109,9 +110,9 @@ function Footer() {
           <Box sx={{ mt: 3 }}>
             <Stack direction="row" spacing={2}>
               {[
-                { icon: <FacebookOutlined />, onClick: () => {} },
+                { icon: <Google />, onClick: () => window.open("https://share.google/jP0Fsw4GDaykFHZMa", "_blank") },
                 { icon: <Instagram />, onClick: () => {} },
-                { icon: <Twitter />, onClick: () => {} },
+                
               ].map((item, i) => (
                 <Button
                   key={i}
@@ -163,7 +164,13 @@ function Footer() {
                   fontSize: { xs: 15, sm: 16 },
                   "&:hover": { color: "#fad13d" },
                 }}
-                onClick={() => history("/Home")}
+                onClick={() => {
+                   if (text === "Home") history("/");
+        else if (text === "Products") history("/products");
+        else if (text === "Color Gallery") history("/color-gallery");
+        else if (text === "About Us") history("/about-us");
+
+                }}
               >
                 {text}
               </Typography>
