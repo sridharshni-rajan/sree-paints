@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Box, Typography, Stack } from "@mui/material";
 import "@fontsource/playfair-display";
+import logo from "../assets/logo.png";
 import {
   FacebookOutlined,
   Instagram,
@@ -63,7 +64,7 @@ function Footer() {
             <Button
               disabled
               sx={{
-                backgroundColor: "#F4C04C",
+                
                 color: "#1E2A47",
                 fontWeight: "700",
                 borderRadius: "14px",
@@ -73,12 +74,19 @@ function Footer() {
                 boxShadow: "0 0 8px 2px rgba(244,192,76,0.18)", 
                 textTransform: "none",
                 "&.Mui-disabled": {
-                  backgroundColor: "#F4C04C",
+                  
                   color: "#1E2A47",
                 },
               }}
             >
-              S
+              <img
+               src={logo}
+               style={{
+      width:"35px",
+      objectFit: "contain",
+      borderRadius: "8px", 
+    }}
+  />
             </Button>
 
             <Typography
