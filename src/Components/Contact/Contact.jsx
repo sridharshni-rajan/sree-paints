@@ -1,4 +1,4 @@
-import { Typography, Card, TextField, Button, Box, Grid } from '@mui/material'
+import { Typography, Card, TextField, Button, Box, Grid ,Dialog,DialogTitle,DialogActions} from '@mui/material'
 import React,{useState} from 'react'
 import emailjs from "emailjs-com"
 import { LocationOn, CallOutlined, MailOutlined, WhatsApp, ChatBubbleOutline } from "@mui/icons-material";
@@ -14,19 +14,61 @@ function Contact() {
     email: false,
     message: false,
   });
+  const [helperTexts, setHelperTexts] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  // 🔥 CHANGED - Added dialog state
+  const [openDialog, setOpenDialog] = useState(false);
   const handlecustomermessage = async() => {
     const newErrors = {
-      name: customerName.trim() === "",
-      phone: customerphoneNumber.trim() === "" ||  !/^\d{10}$/.test(customerphoneNumber.trim()),
-      email: customeremailaddress.trim() === "" || !/^[A-Za-z0-9._%+-]+@gmail\.com$/i.test(customeremailaddress.trim()),
+      name:
+        customerName.trim() === "" ||
+        !/^[A-Za-z\s]+$/.test(customerName.trim()), // only letters and spaces
+      phone:
+        customerphoneNumber.trim() === "" ||
+        !/^\d{10}$/.test(customerphoneNumber.trim()), // must be 10 digits
+      email:
+        customeremailaddress.trim() === "" ||
+        !/^[A-Za-z0-9._%+-]+@gmail\.com$/i.test(
+          customeremailaddress.trim()
+        ), // must end with @gmail.com
       message: customermessage.trim() === "",
     };
 
+    const newHelperTexts = {
+      name:
+        newErrors.name && customerName.trim() === ""
+          ? "Name is required."
+          : newErrors.name
+          ? "Only alphabets are allowed."
+          : "",
+      phone:
+        newErrors.phone && customerphoneNumber.trim() === ""
+          ? "Phone number is required."
+          : newErrors.phone
+          ? "Must be a valid 10-digit number."
+          : "",
+      email:
+        newErrors.email && customeremailaddress.trim() === ""
+          ? "Email is required."
+          : newErrors.email
+          ? "Enter a valid Gmail address."
+          : "",
+      message:
+        newErrors.message && customermessage.trim() === ""
+          ? "Message cannot be empty."
+          : "",
+    };
+
     setErrors(newErrors);
-    if (Object.values(newErrors).includes(true)) {
-      alert("⚠️ Please fill in all required fields.");
-      return;
-    }
+    setHelperTexts(newHelperTexts);
+
+    // 🔥 STOP if invalid
+    if (Object.values(newErrors).includes(true)) return;
     
     try {
         const SERVICE_ID="service_sn3aa0i";
@@ -49,12 +91,13 @@ function Contact() {
         console.log(templateParams)
     
         console.log("Email successfully sent!", response.status, response.text);
-        alert("Your message has been sent successfully!");
+        setOpenDialog(true); // 🔥 Open success dialog
         setcustomerName("");
     setcustomerphonenumber("");
     setcustomeremailaddress("");
     setcustomermessage("");
     setErrors({ name: false, phone: false, email: false, message: false });
+    setHelperTexts({ name: "", phone: "", email: "", message: "" });
 
       }
       catch (error) {
@@ -68,6 +111,14 @@ function Contact() {
     return (
         
         <div>
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>✅ Message Sent Successfully!</DialogTitle>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
             {/*-Get In Touch-*/}
             <Card
                 sx={{
@@ -152,14 +203,16 @@ function Contact() {
                         </Typography>
                         <TextField
                             placeholder="Enter your name"
+                            required
                             variant="outlined"
                             value={customerName}
+                            error={errors.name}
+                            helperText={errors.name? helperTexts.name : ""}
                             onChange={(e)=>{setcustomerName(e.target.value);
-                                if (e.target.value.trim() !== "") {
-      // ✅ Clear red border when field filled
-      setErrors((prev) => ({ ...prev, name: false }));
-    }
-                            }}
+                                if (/^[A-Za-z\s]+$/.test(e.target.value.trim()))
+                  setErrors((prev) => ({ ...prev, name: false }));
+    }}
+                            
                             fullWidth
                             InputProps={{
                                 sx: {
@@ -202,6 +255,9 @@ function Contact() {
                             placeholder="+91 XXXXX XXXXX"
                             variant="outlined"
                             value={customerphoneNumber}
+                            error={errors.phone}
+                            helperText={errors.phone? helperTexts.phone : ""}
+                            
                             fullWidth
                             onChange={(e)=>{
                                 const val = e.target.value.replace(/\D/g, ""); // 🔥 allow only digits
@@ -250,6 +306,8 @@ function Contact() {
                             variant="outlined"
                             fullWidth
                             value={customeremailaddress}
+                            error={errors.email}
+                            helperText={errors.email? helperTexts.email : ""}
                             onChange={(e)=>{setcustomeremailaddress(e.target.value);
                                 if (/^[A-Za-z0-9._%+-]+@gmail\.com$/i.test(e.target.value.trim())) {
                   setErrors((prev) => ({ ...prev, email: false })); // 🔥 clears red when valid Gmail
@@ -299,6 +357,8 @@ function Contact() {
                             fullWidth
                             multiline
                             value={customermessage}
+                            error={errors.message}
+                            helperText={errors.message? helperTexts.message : ""}
                             onChange={(e)=>{
                                 setcustomermessage(e.target.value);
                                 if (e.target.value.trim() !== "") {
