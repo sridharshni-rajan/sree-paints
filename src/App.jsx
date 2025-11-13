@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Footer from './Footer/Footer';
 
 function App() {
@@ -14,10 +15,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<div>About Us</div>} />
+          <Route path="/about-us" element={<About />} />
           <Route path="/products" element={<div>Products</div>} />
           <Route path="/gallery" element={<div>Color Gallery</div>} />
-          <Route path="/contact" element={<div>Contact</div>} />
+          <Route path="/contact" element={<div>Contact</div>} /> 
         </Routes>
         <Footer />
       </Router> 
