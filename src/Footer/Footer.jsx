@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box, Typography, Stack } from "@mui/material";
 import "@fontsource/playfair-display";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-blue.png";
 import {
   FacebookOutlined,
   Instagram,
@@ -64,7 +64,7 @@ function Footer() {
             <Button
               disabled
               sx={{
-                
+                backgroundColor: "#F4C04C",
                 color: "#1E2A47",
                 fontWeight: "700",
                 borderRadius: "14px",
@@ -74,19 +74,14 @@ function Footer() {
                 boxShadow: "0 0 8px 2px rgba(244,192,76,0.18)", 
                 textTransform: "none",
                 "&.Mui-disabled": {
-                  
+                  backgroundColor: "#F4C04C",
                   color: "#1E2A47",
                 },
               }}
             >
-              <img
-               src={logo}
-               style={{
-      width:"35px",
-      objectFit: "contain",
-      borderRadius: "8px", 
-    }}
-  />
+              <img src={logo} alt="Logo" 
+                  style={{ width: "33px", height: "33px", objectFit :"contain" }} 
+              />
             </Button>
 
             <Typography
@@ -116,11 +111,11 @@ function Footer() {
 
           
           <Box sx={{ mt: 3 }}>
-            <Stack direction="row" spacing={2}>
+           <Stack direction="row" spacing={2}>
               {[
                 { icon: <Google />, onClick: () => window.open("https://share.google/jP0Fsw4GDaykFHZMa", "_blank") },
                 { icon: <Instagram />, onClick: () => {} },
-                
+
               ].map((item, i) => (
                 <Button
                   key={i}
@@ -173,11 +168,19 @@ function Footer() {
                   "&:hover": { color: "#fad13d" },
                 }}
                 onClick={() => {
-                   if (text === "Home") history("/");
-        else if (text === "Products") history("/products");
-        else if (text === "Color Gallery") history("/color-gallery");
-        else if (text === "About Us") history("/about-us");
-
+                  if (text === "Home") {
+                    history("/");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "Products") {
+                    history("/products");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "Color Gallery") {
+                    history("/color-gallery");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "About Us") {
+                    history("/about-us");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
                 }}
               >
                 {text}
