@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Box, Typography, Stack } from "@mui/material";
 import "@fontsource/playfair-display";
+import logo from "../assets/logo-blue.png";
 import {
   FacebookOutlined,
   Instagram,
@@ -10,6 +11,7 @@ import {
   MailOutlined,
   CopyrightOutlined,
   Home,
+  Google
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 // Custom Telephone Icon (from Google Fonts)
@@ -77,7 +79,9 @@ function Footer() {
                 },
               }}
             >
-              S
+              <img src={logo} alt="Logo" 
+                  style={{ width: "33px", height: "33px", objectFit :"contain" }} 
+              />
             </Button>
 
             <Typography
@@ -107,11 +111,11 @@ function Footer() {
 
           
           <Box sx={{ mt: 3 }}>
-            <Stack direction="row" spacing={2}>
+           <Stack direction="row" spacing={2}>
               {[
-                { icon: <FacebookOutlined />, onClick: () => {} },
+                { icon: <Google />, onClick: () => window.open("https://share.google/jP0Fsw4GDaykFHZMa", "_blank") },
                 { icon: <Instagram />, onClick: () => {} },
-                { icon: <Twitter />, onClick: () => {} },
+
               ].map((item, i) => (
                 <Button
                   key={i}
@@ -163,7 +167,21 @@ function Footer() {
                   fontSize: { xs: 15, sm: 16 },
                   "&:hover": { color: "#fad13d" },
                 }}
-                onClick={() => history("/Home")}
+                onClick={() => {
+                  if (text === "Home") {
+                    history("/");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "Products") {
+                    history("/products");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "Color Gallery") {
+                    history("/color-gallery");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (text === "About Us") {
+                    history("/about-us");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
               >
                 {text}
               </Typography>
